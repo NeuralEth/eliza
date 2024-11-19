@@ -1,6 +1,7 @@
 import { PostgresDatabaseAdapter } from "@ai16z/adapter-postgres";
 import { SqliteDatabaseAdapter } from "@ai16z/adapter-sqlite";
 import { DirectClientInterface } from "@ai16z/client-direct";
+import { UIClientInterface } from "@ai16z/client-ui";
 import { DiscordClientInterface } from "@ai16z/client-discord";
 import { AutoClientInterface } from "@ai16z/client-auto";
 import { TelegramClientInterface } from "@ai16z/client-telegram";
@@ -263,7 +264,8 @@ async function startAgent(character: Character, directClient: any) {
 }
 
 const startAgents = async () => {
-    const directClient = await DirectClientInterface.start();
+    // const directClient = await DirectClientInterface.start();
+    const uiClient = await UIClientInterface.start();
     const args = parseArguments();
 
     let charactersArg = args.characters || args.character;
@@ -276,7 +278,7 @@ const startAgents = async () => {
 
     try {
         for (const character of characters) {
-            await startAgent(character, directClient);
+            await startAgent(character, uiClient);
         }
     } catch (error) {
         console.error("Error starting agents:", error);

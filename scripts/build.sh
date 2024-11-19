@@ -30,6 +30,7 @@ PACKAGES=(
     "adapter-supabase"
     "client-auto"
     "client-direct"
+    "client-ui"
     "client-discord"
     "client-telegram"
     "client-twitter"
