@@ -22,7 +22,6 @@ import fs from "fs";
 import readline from "readline";
 import yargs from "yargs";
 import { character } from "./character.ts";
-import path from "path";
 
 export const wait = (minTime: number = 1000, maxTime: number = 3000) => {
     const waitTime =
@@ -55,35 +54,21 @@ export function parseArguments(): {
 export async function loadCharacters(
     charactersArg: string
 ): Promise<Character[]> {
-    let characterPaths: string[] = [];
-
-    if (charactersArg?.endsWith('/')) {
-        const dirPath = charactersArg.startsWith('./') ? charactersArg : `./${charactersArg}`;
-        try {
-            const files = fs.readdirSync(dirPath);
-            characterPaths = files
-                .filter(file => file.endsWith('.json'))
-                .map(file => path.join(dirPath, file));
-        } catch (e) {
-            console.error(`Error reading directory ${dirPath}: ${e}`);
-        }
-    } else {
-        characterPaths = charactersArg
-            ?.split(",")
-            .map((path) => path.trim())
-            .map((path) => {
-                if (path.startsWith("../characters")) {
-                    return `../${path}`;
-                }
-                if (path.startsWith("characters")) {
-                    return `../../${path}`;
-                }
-                if (path.startsWith("./characters")) {
-                    return `../.${path}`;
-                }
-                return path;
-            }) || [];
-    }
+    let characterPaths = charactersArg
+        ?.split(",")
+        .map((path) => path.trim())
+        .map((path) => {
+            if (path.startsWith("../characters")) {
+                return `../${path}`;
+            }
+            if (path.startsWith("characters")) {
+                return `../../${path}`;
+            }
+            if (path.startsWith("./characters")) {
+                return `../.${path}`;
+            }
+            return path;
+        });
 
     const loadedCharacters = [];
 
