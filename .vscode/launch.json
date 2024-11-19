@@ -11,6 +11,14 @@
             "runtimeExecutable": "pnpm",
             "runtimeArgs": ["run", "dev"],
             "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch via pnpm (all)",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["run", "dev:all"],
+            "skipFiles": ["<node_internals>/**"]
         }
     ]
 }
