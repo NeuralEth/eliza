@@ -9,4 +9,4 @@ npx concurrently --raw \
   "pnpm --dir packages/plugin-node dev -- $*" \
   "pnpm --dir packages/adapter-sqlite dev -- $*" \
   "pnpm --dir packages/adapter-postgres dev -- $*" \
-  "node -e \"setTimeout(() => process.exit(0), 5000)\" && pnpm --dir packages/agent dev -- $* --characters=\"characters/fusion.character.json,characters/shannonai.character.json\""
+  "node -e \"setTimeout(() => process.exit(0), 5000)\" && pnpm --dir packages/agent dev -- $*"
